@@ -1,0 +1,40 @@
+<h2>number_to_currency</h2>
+<h3>test number: 34.5</h3>
+<%= number_to_currency(34.5) %><br/>
+<%= number_to_currency(34.5, precision: 0, unit: "kr", format: "%n %u") %><br/>
+<hr />
+
+<h2>number_to_percentage</h2>
+<h3>test number: 34.5</h3>
+<%= number_to_percentage(34.5) %><br/>
+<%= number_to_percentage(34.5, precision: 1, separator: ',') %><br/>
+<hr />
+
+<h2>number_with_precision aka number_to_rounded"</h2>
+<h3>test number: 34.56789</h3>
+<%= number_with_precision(34.56789) %><br/>
+<%= number_with_precision(34.56789, precision: 6) %><br/>
+<hr />
+
+<h2>number_with_delimiter aka number_to_delimited</h2>
+<h3>test number: 3456789</h3>
+<%= number_with_delimiter(3456789) %><br/>
+<%= number_with_delimiter(3456789, delimiter: ' ') %><br/>
+<hr />
+
+<h2>number_to_human</h2>
+<h3>test number: 123456789</h3>
+<%= number_to_human(123456789) %><br/>
+<%= number_to_human(123456789, precision: 5) %><br/>
+<hr />
+
+<h2>number_to_human_size</h2>
+<h3>test number: 1234567</h3>
+<%= number_to_human_size(1234567) %><br/>
+<%= number_to_human_size(1234567, precision: 2) %><br/>
+<hr />
+
+<h2>number_to_phone</h2>
+<h3>test number: 1234567890</h3>
+<%= number_to_phone(1234567890) %><br/>
+<%= number_to_phone(1234567890, area_code: true, delimiter: ' ', country_code: 1, extension: '321') %><br/>

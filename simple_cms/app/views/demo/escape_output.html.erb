@@ -1,0 +1,23 @@
+<!-- .html_safe we are considering the strings as save --> 
+<% evil_string = "<script>alert('Gotcha');</script>".html_safe %>
+<% good_dtring = "<strong>Welcome to my site!</strong>".html_safe %>
+
+<!-- <%= raw(evil_string) %><br/> -->
+<!-- <%= raw(good_dtring) %><br/> -->
+
+<%= evil_string.html_safe? %><br/>
+<%= good_dtring.html_safe? %><br/>
+
+<!-- with h(<<string>>) we are scaping html content-->
+<!-- <%= h(evil_string) %><br/> -->
+<!-- <%= h(good_dtring) %><br/> -->
+
+<% simple_string = '<strong>Please</strong> visit <a href="http://elotrolado.net">us</a>.' %>
+<%= strip_links(simple_string) %><br/>
+<%= strip_tags(simple_string) %><br/>
+
+<!-- with sanitize(<<html>>, <<options>>) we are removing html and JavaScript. Options is the white list tags -->
+
+<%= sanitize(evil_string) %><br/>
+<%= sanitize(simple_string, tags: []) %><br/>
+<%= sanitize(simple_string, tags: ['strong','em','a']) %><br/>

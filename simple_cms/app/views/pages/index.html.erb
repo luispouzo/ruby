@@ -1,0 +1,33 @@
+<% @page_title = "Pages" %>
+
+<div class="pages index">
+	<h2>Pages</h2>
+	<%= link_to("Add New Page", new_page_path(@page)) %>
+	<table class="listing" summary="Page list">
+		<tr class="header">
+			<tr>&nbsp;</tr>
+			<tr>Name</tr>
+			<tr>Visible</tr>
+			<tr>Link</tr>
+			<tr>Actions</tr>
+		</tr>
+		<% @pages.each do |page| %>
+			<tr>
+				<td><%= page.position %></td>
+				<td><%= page.name %></td>
+				<td class="center"><%= status_tag(page.visible) %></td>
+				<td class="center"><%= page.permalink %></td>
+				<td class="actions">
+					<%= link_to "Show", page %>
+					<%= link_to "Edit", edit_page_path(page.id) %>
+				<!--	<%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %> -->
+
+					<%= button_to "Destroy", { action: "destroy", id: page.id },
+	                                method: :delete, data: { confirm: "Are you sure?" } %>
+
+				</td>
+			</tr>
+		<% end %>	
+	</table>
+</div>
+

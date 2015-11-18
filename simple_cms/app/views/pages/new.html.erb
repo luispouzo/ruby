@@ -1,0 +1,15 @@
+<%= link_to "<< Back to List", :back %>
+
+<div class="pages new">
+	<h2>Create Page</h2>
+
+	<%= form_for @page do |f| %>
+
+		<%= render(partial: 'pagesform', locals: {f: f})  %>
+
+	  <div class="form-buttons">
+	    <%= f.submit "Create Page"%>
+	  </div>
+
+	<% end %>
+</div>
