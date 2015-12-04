@@ -2,5 +2,8 @@
 <p>Hello Luis</p>
 
 <br/>
-<%= link_to('Roar', '#', onclick: "jsRoar('JavaScript'); return true;") %>
-<%= javascript_tag("jsRoar('Rails');") %>
+<% name = "Kevin" %>
+<% name = "Sorry!'); alert('I hacked you!" %>
+
+<%= link_to('Roar', '#', onclick: "jsRoar('#{j(name)}'); return true;") %>
+<%= javascript_tag("jsRoar('#{j(name)}');") %>

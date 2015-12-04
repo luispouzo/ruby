@@ -1,29 +1,44 @@
 <% @page_title = "Pages" %>
 
+<%= link_to("<< Back to Subjects", {controller: 'subjects', action: 'index'}, class: 'back-link') %>
+
 <div class="pages index">
 	<h2>Pages</h2>
-	<%= link_to("Add New Page", new_page_path(@page)) %>
+
+	<%= link_to(image_tag('plus_sign.png', size: '11x11', alt: '+') + " Add New Page", {action: 'new', subject_id: @subject.id}, class: 'action new') %>
+
 	<table class="listing" summary="Page list">
 		<tr class="header">
-			<tr>&nbsp;</tr>
-			<tr>Name</tr>
-			<tr>Visible</tr>
-			<tr>Link</tr>
-			<tr>Actions</tr>
+			<th>&nbsp;</th>
+			<th>Subject</th>
+			<th>Page</th>
+			<th>Permalink</th>
+			<th>Visible</th>
+			<!-- <tr>Sections</tr> -->
+			<th>Actions</th>
 		</tr>
 		<% @pages.each do |page| %>
 			<tr>
 				<td><%= page.position %></td>
+				<td><%= page.subject.name if page.subject %></td>
 				<td><%= page.name %></td>
+				<td><%= page.permalink %></td>
 				<td class="center"><%= status_tag(page.visible) %></td>
-				<td class="center"><%= page.permalink %></td>
 				<td class="actions">
-					<%= link_to "Show", page %>
-					<%= link_to "Edit", edit_page_path(page.id) %>
-				<!--	<%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %> -->
+					<%= link_to "View Sections", {controller: 'sections', page_id: page.id}, class: 'action show' %>
+					<%= link_to "Edit", { action: "edit", id: page.id, subject_id: @subject.id }, class: 'action edit' %>
+				<!--	
+					<%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %> 
+				-->
+					
+				<!--	
+					<%= form_tag do %>
+					  <input name="delete" type="hidden" value="delete" />
+					<% end %>
+				-->
 
-					<%= button_to "Destroy", { action: "destroy", id: page.id },
-	                                method: :delete, data: { confirm: "Are you sure?" } %>
+					<%= button_to "Destroy", { action: "destroy", id: page.id, subject_id: @subject.id },
+	                                method: :delete, class: 'action delete', data: { confirm: "Are you sure?" } %>
 
 				</td>
 			</tr>

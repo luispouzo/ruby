@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106212429) do
+ActiveRecord::Schema.define(version: 20151125200944) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "first_name",      limit: 25
     t.string   "last_name",       limit: 50
     t.string   "email",           limit: 100, default: "", null: false
     t.string   "username",        limit: 25
-    t.string   "hashed_password", limit: 40
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.string   "password_digest", limit: 255
   end
 
   add_index "admin_users", ["username"], name: "index_admin_users_on_username", using: :btree
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20151106212429) do
 
   create_table "pages", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.integer  "permalink",  limit: 4
+    t.string   "permalink",  limit: 255
     t.integer  "position",   limit: 4
     t.string   "visible",    limit: 255, default: "0"
     t.integer  "subject_id", limit: 4
@@ -65,7 +65,10 @@ ActiveRecord::Schema.define(version: 20151106212429) do
     t.text     "content",      limit: 65535
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+    t.integer  "page_id",      limit: 4
   end
+
+  add_index "sections", ["page_id"], name: "index_sections_on_page_id", using: :btree
 
   create_table "subjects", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -78,4 +81,5 @@ ActiveRecord::Schema.define(version: 20151106212429) do
   add_foreign_key "pages", "subjects"
   add_foreign_key "section_edits", "admin_users"
   add_foreign_key "section_edits", "sections"
+  add_foreign_key "sections", "pages"
 end

@@ -1,0 +1,15 @@
+<%= link_to "<< Back to List", :back %>
+
+<div class="user new">
+	<h2>Create User</h2>
+
+	<%= form_for @admin_user do |f| %>
+
+	  <%= render(partial: 'form', locals: {f: f})  %>
+	 
+	  <div class="form-buttons">
+	    <%= f.submit "Create Admin User"%>
+	  </div>
+
+	<% end %>
+</div>

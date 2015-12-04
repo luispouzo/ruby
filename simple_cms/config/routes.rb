@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
 #  get 'subjects/index'
 
 #  get 'subjects/show'
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'demo#index'
+   root 'public#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -23,7 +24,29 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-     resources :subjects, :pages, :demo
+  get 'show/:permalink', to: 'public#show'
+  get 'admin', to: 'access#index'
+
+
+  resources :subjects, :pages, :sections, :demo, :admin_users
+  resources :public, only: [:index, :show]
+  resources :access do
+    collection do
+      get 'logout'
+      get 'login'
+      post 'attempt_login'
+    end
+  end
+
+  # =========================================================================== 
+  # # map access controller to /admin path 
+  # # It will also create the logout_admin_url and logout_admin_path route helpers.
+  #    resources :access, path: '/admin' do
+  #       collection do
+  #         get 'logout'
+  #       end
+  #     end
+  # ===========================================================================
 
   # Example resource route with options:
   #   resources :products do

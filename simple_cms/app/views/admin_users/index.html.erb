@@ -1,0 +1,31 @@
+<% @page_title = "Admin Users" %>
+
+<%= link_to("<< Back to Menu", {controller: 'access', action: 'index'}, class: 'back-link') %>
+
+<div class="admin_users index">
+	<h2>Users</h2>
+
+	<%= link_to(image_tag('plus_sign.png', size: '11x11', alt: '+') + " Add New Admin", new_admin_user_path(@admin_user), class: 'action new') %>
+
+	<div><%= pluralize(@admin_users.size, 'admin user') %> found</div>
+	<table class="listing" summary="Admin User list">
+		<tr class="header">
+			<th>Username</th>
+		  <th>Name</th>
+		  <th>Email</th>
+		  <th>Actions</th>
+		</tr>
+		<% @admin_users.each do |admin_user| %>
+			<tr class="<%= cycle('odd','even') %>">
+				<td><%= admin_user.username %></td>
+				<td><%= admin_user.name %></td>
+				<td><%= mail_to(admin_user.email) %></td>
+				<td class="actions">
+					<%= link_to "Edit", edit_admin_user_path(admin_user), class: 'action edit' %>
+					<%= button_to("Delete", {action: 'destroy', id: admin_user.id}, method: :delete, class: 'action delete', data: { confirm: "Are you sure?" }) %>
+				</td>
+			</tr>
+		<% end %>	
+	</table>
+</div>
+

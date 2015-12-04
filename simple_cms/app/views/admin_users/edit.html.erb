@@ -1,0 +1,15 @@
+<%= link_to "<< Back to List", :back %>
+
+<div class="user edit">
+	<h2>Edit Admin User</h2>
+
+	<%= form_for @admin_user do |f| %>
+
+	  <%= render(partial: 'form', locals: {f: f})  %>
+	 
+	  <div class="form-buttons">
+	    <%= f.submit "Update Admin User"%>
+	  </div>
+
+	<% end %>
+</div>

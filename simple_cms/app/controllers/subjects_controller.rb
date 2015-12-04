@@ -2,7 +2,8 @@ class SubjectsController < ApplicationController
   
 	layout "admin"
   # before_action :get_subject, only: [:show, :edit, :update, :destroy]
-
+  before_action :confirm_logged_in
+  
   # GET /subjects
   # GET /subjects.json
   def index
@@ -23,11 +24,13 @@ class SubjectsController < ApplicationController
   # GET /subjects/new
   def new
     @subject = Subject.new
+    @subject_count = Subject.count + 1
   end
 
   # GET /subjects/1/edit
   def edit
     @subject = get_subject
+    @subject_count = Subject.count
   end
 
   # POST /subjects
@@ -48,7 +51,9 @@ class SubjectsController < ApplicationController
         # TODO: format.json { render action: :show, status: created, location: @product }
       else
         # If save fails, redisplay the form so user can fix problems
-        format.html { render :new }
+        format.html { 
+          @subject_count = Subject.count
+          render :new }
         # TODO: format.json { render json: @subject.errors, status: :unprocessable_entity }
       end
     end
@@ -71,7 +76,9 @@ class SubjectsController < ApplicationController
         # TODO: format.json { head :no_content }
       else
        # If updates fails, redisplay the form so user can fix problems
-       format.html { render :edit }
+       format.html {
+        @subject_count = Subject.count 
+        render :edit }
        # TODO: format.json { render json: @subject.errors, status: :unprocessable_entity }
       end
     end

@@ -1,18 +1,20 @@
 <% @page_title = "Subjects" %>
 
+<%= link_to("<< Back to Menu", {controller: 'access', action: 'index'}, class: 'back-link') %>
+
 <div class="subjects index">
 	<h2>Subjects</h2>
 
-	<%= link_to("Add New Subject", new_subject_path(@subject), class: 'action new') %>
+	<%= link_to(image_tag('plus_sign.png', size: '11x11', alt: '+') + " Add New Subject", new_subject_path(@subject), class: 'action new') %>
 
 	<div><%= pluralize(@subjects.size, 'subject') %> found</div>
 	<table class="listing" summary="Subject list">
 		<tr class="header">
-			<tr>&nbsp;</tr>
-			<tr>Subject</tr>
-			<tr>Visible</tr>
-			<tr>Pages</tr>
-			<tr>Actions</tr>
+			<th>&nbsp;</th>
+			<th>Subject</th>
+			<th>Visible</th>
+			<th>Pages</th>
+			<th>Actions</th>
 		</tr>
 		<% @subjects.each do |subject| %>
 			<tr class="<%= cycle('odd','even') %>">
@@ -21,6 +23,7 @@
 				<td class="center"><%= status_tag(subject.visible) %></td>
 				<td class="center"><%= subject.pages.size %></td>
 				<td class="actions">
+					<%= link_to "View Pages",{controller: 'pages', subject_id: subject.id}, class: 'action show' %>
 					<%= link_to "Show", subject, class: 'action show' %>
 					<%= link_to "Edit", edit_subject_path(subject), class: 'action edit' %>
 					<%= button_to("Delete", {action: 'destroy', id: subject.id}, method: :delete, class: 'action delete', data: { confirm: "Are you sure?" }) %>
